@@ -7,3 +7,26 @@ export const getPopular = async () => {
 
   return data;
 };
+
+export const addMovieIDetails = async id => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=004aa31770cc2729c6dd319813b8b5dc`
+  );
+  return data;
+};
+
+export const getReviews = async id => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=004aa31770cc2729c6dd319813b8b5dc`
+  );
+
+  return data;
+};
+
+export const getCast = async id => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=004aa31770cc2729c6dd319813b8b5dc`
+  );
+
+  return data;
+};

@@ -1,0 +1,15 @@
+.movieItem {
+  display: flex;
+  margin-top: 15px;
+  gap: 15px;
+}
+
+.wraptop {
+  padding-top: 15px;
+}
+
+.wrapbottom {
+  margin-top: 10px;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+}

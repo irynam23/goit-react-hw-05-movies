@@ -13,3 +13,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.header {
+  box-shadow: 0 4px 10px -2px gray;
+}
+
+.navlink {
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding: 20px;
+  transition: all 0.3s;
+  color: black;
+  font-size: 24px;
+}
+.navlink.active {
+  color: red;
+  border-bottom: 2px solid red;
+}
