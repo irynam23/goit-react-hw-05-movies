@@ -15,7 +15,9 @@ const Reviews = () => {
 
       const { results } = await getReviews(movieId);
 
-      setReviews(results);
+      results.length
+        ? setReviews(results)
+        : setError("We don't have any reviews for this movie");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -28,7 +30,7 @@ const Reviews = () => {
 
     fetchReviews(movieId);
   }, [movieId]);
-  console.log(reviews);
+
   return (
     <div>
       {isLoading && <Loader />}

@@ -30,3 +30,11 @@ export const getCast = async id => {
 
   return data;
 };
+
+export const getByName = async query => {
+  const { data } = await axios.get(
+    `https://api.themoviedb.org/3/search/movie?api_key=004aa31770cc2729c6dd319813b8b5dc&query=${query}`
+  );
+
+  return data.results;
+};

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Loader } from 'components/Loader/Loader';
 import { getCast } from 'api';
 import { useParams } from 'react-router-dom';
+import { Notify } from 'notiflix';
 
 const Cast = () => {
   const { movieId } = useParams();
   const [cast, setCast] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   async function fetchCast(movieId) {
     try {
@@ -17,12 +17,12 @@ const Cast = () => {
 
       setCast(movieCast);
     } catch (error) {
-      setError(error.message);
+      Notify.failure('Oooops, smth went wrong :(');
     } finally {
       setIsLoading(false);
     }
   }
-  console.log(cast);
+
   useEffect(() => {
     if (movieId === null) return;
 
@@ -34,10 +34,9 @@ const Cast = () => {
       {isLoading && <Loader />}
       {cast !== null && (
         <div>
-          {cast.map(actor => (
-            <li key={actor.id}>
+          {cast.map((actor, index) => (
+            <li key={actor.id + index}>
               <img
-                className
                 alt="movie"
                 src={'https://image.tmdb.org/t/p/w500' + actor.profile_path}
                 loading="lazy"

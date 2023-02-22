@@ -1,18 +1,18 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { useEffect, useState, lazy, Suspense } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { addMovieIDetails } from 'api.js';
 import { Link, useParams } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { Notify } from 'notiflix';
 import css from './MovieDetails.module.css';
-import Reviews from 'components/Reviews/Reviews';
-import Cast from 'components/Cast/Cast';
+const Reviews = lazy(() => import('components/Reviews/Reviews'));
+const Cast = lazy(() => import('components/Cast/Cast'));
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { movieId } = useParams();
+  const location = useLocation();
 
   useEffect(() => {
     async function fetchMovies() {
@@ -29,11 +29,11 @@ const MovieDetails = () => {
     }
     fetchMovies();
   }, [movieId]);
-  console.log(movieDetails);
+
   return (
     <>
       <div className={css.wraptop}>
-        <Link to="/">Go back</Link>
+        <Link to={location.state?.from ?? '/'}>Go back</Link>
         {movieDetails && (
           <div className={css.movieItem}>
             <img
@@ -66,18 +66,23 @@ const MovieDetails = () => {
         <p>Additional information</p>
         <ul>
           <li>
-            <Link to={`cast`}>Cast</Link>
+            <Link to={`cast`} state={{ from: location.state?.from ?? '/' }}>
+              Cast
+            </Link>
           </li>
           <li>
-            <Link to={`reviews`}>Reviews</Link>
+            <Link to={`reviews`} state={{ from: location.state?.from ?? '/' }}>
+              Reviews
+            </Link>
           </li>
         </ul>
       </div>
-
-      <Routes>
-        <Route path="cast" element={<Cast />} />
-        <Route path="reviews" element={<Reviews />} />
-      </Routes>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="cast" element={<Cast />} />
+          <Route path="reviews" element={<Reviews />} />
+        </Routes>
+      </Suspense>
     </>
   );
 };

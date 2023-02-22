@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getPopular } from 'api.js';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { Notify } from 'notiflix';
 
 const Home = () => {
   const [movies, setMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     async function fetchMovies() {
@@ -34,7 +34,10 @@ const Home = () => {
           movies.map(movie => {
             return (
               <li key={movie.id}>
-                <Link to={`/movies/${movie.id}`}>
+                <Link
+                  to={`/movies/${movie.id}`}
+                  state={{ from: location.pathname }}
+                >
                   <h3>{movie.title}</h3>
                 </Link>
               </li>

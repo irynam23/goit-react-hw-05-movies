@@ -16,13 +16,14 @@ code {
 
 .header {
   box-shadow: 0 4px 10px -2px gray;
+  padding: 20px;
 }
 
 .navlink {
   display: inline-block;
   text-decoration: none;
   border-bottom: 2px solid transparent;
-  padding: 20px;
+  margin-right: 10px;
   transition: all 0.3s;
   color: black;
   font-size: 24px;
