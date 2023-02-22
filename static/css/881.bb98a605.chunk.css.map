@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/881.bb98a605.chunk.css","mappings":"AAAA,oBACE,YACF,CAEA,qBACE,WAAY,CACZ,WACF,CAEA,mBACE,WACF","sources":["pages/Movies/Movies.module.css"],"sourcesContent":[".wrap {\n  padding: 20px;\n}\n\n.input {\n  padding: 5px;\n  width: 300px;\n}\n\n.btn {\n  padding: 5px;\n}\n"],"names":[],"sourceRoot":""}
