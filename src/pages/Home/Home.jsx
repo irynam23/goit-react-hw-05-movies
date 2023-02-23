@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { getPopular } from 'api.js';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Loader } from 'components/Loader/Loader';
 import { Notify } from 'notiflix';
+import { MoviesList } from 'components/MoviesList/MoviesList';
 
 const Home = () => {
   const [movies, setMovies] = useState(null);
@@ -29,21 +30,7 @@ const Home = () => {
   return (
     <div>
       <h1>Trending today</h1>
-      <ul>
-        {movies &&
-          movies.map(movie => {
-            return (
-              <li key={movie.id}>
-                <Link
-                  to={`/movies/${movie.id}`}
-                  state={{ from: location.pathname }}
-                >
-                  <h3>{movie.title}</h3>
-                </Link>
-              </li>
-            );
-          })}
-      </ul>
+      {movies?.length && <MoviesList movies={movies} location={location} />}
       {isLoading && <Loader />}
     </div>
   );

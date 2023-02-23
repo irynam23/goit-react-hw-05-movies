@@ -3,6 +3,7 @@ import { Loader } from 'components/Loader/Loader';
 import { getCast } from 'api';
 import { useParams } from 'react-router-dom';
 import { Notify } from 'notiflix';
+import { CastItem } from 'components/CastItem/CastItem';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -35,16 +36,12 @@ const Cast = () => {
       {cast !== null && (
         <div>
           {cast.map((actor, index) => (
-            <li key={actor.id + index}>
-              <img
-                alt="movie"
-                src={'https://image.tmdb.org/t/p/w500' + actor.profile_path}
-                loading="lazy"
-                height="300"
-              />
-              <p>{actor.name}</p>
-              <p>{actor.character}</p>
-            </li>
+            <CastItem
+              key={actor.id + index}
+              name={actor.name}
+              character={actor.character}
+              picture={actor.profile_path}
+            />
           ))}
         </div>
       )}
